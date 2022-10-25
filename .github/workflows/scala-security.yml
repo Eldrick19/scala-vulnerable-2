@@ -1,0 +1,30 @@
+name: Scala Static analysis
+
+on:
+  push:
+    branches: ["2.8.x"]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: ["2.8.x"]
+    
+jobs:
+  psalm:
+    name: Scala
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+      security-events: write   
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+      # Initializes Scala for scanning.
+    - name: Scala BetterScan Community Edition
+      uses: topcodersonline/betterscan@v3
+      
+    - name: Upload Security Analysis results to GitHub
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+       sarif_file: /home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/report.sarif
