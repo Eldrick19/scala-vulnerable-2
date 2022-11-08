@@ -26,9 +26,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
+      - run: ls -a
       - uses: pmd/pmd-github-action@v1
         with:
-          rulesets: 'ruleset.xml --debug'
+          rulesets: 'ruleset.xml'
           analyzeModifiedFilesOnly: false
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v1
