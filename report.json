@@ -7,6 +7,13 @@
         "line": 30
     },
     {
+        "hash": "8a63c01d67b07a44499a499692ae7e9d",
+        "description": "Text4shell vulnerable 1.5 .. 1.9",
+        "severity": "Warning",
+        "file": "findsecbugs-cli-1.12.0/lib/commons-text-1.9.jar",
+        "line": 1
+    },
+    {
         "hash": "31c2657a6b74e5a48af4fea6f77726bc",
         "description": "crypto.pseudoRandomBytes()/Math.random() is a cryptographically weak random number generator.",
         "severity": "Warning",
