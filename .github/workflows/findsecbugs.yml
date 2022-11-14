@@ -3,18 +3,17 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: pmd
+name: Find Security Bugs
 
 on:
-  push:
-    branches: [ "2.8.x" ]
-  pull_request:
-    branches: [ "2.8.x" ]
-permissions:
-  contents: read
+  # push:
+  #  branches: [ "2.8.x" ]
+  # pull_request:
+  #  branches: [ "2.8.x" ]
+  workflow_dispatch:
 
 jobs:
-  pmd-code-scan:
+  findsecbugs:
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results

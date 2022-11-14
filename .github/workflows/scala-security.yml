@@ -20,6 +20,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Build application
+      run: sbt run
+
       # Initializes Scala for scanning.
     - name: Scala BetterScan Community Edition
       uses: topcodersonline/betterscan@v3
