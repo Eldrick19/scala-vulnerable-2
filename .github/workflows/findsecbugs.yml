@@ -28,9 +28,12 @@ jobs:
 
       - name: Download/Install Scala Security Scanner
         run: |
+          cd ..
           wget https://github.com/find-sec-bugs/find-sec-bugs/releases/download/version-1.12.0/findsecbugs-cli-1.12.0.zip
           unzip findsecbugs-cli-1.12.0.zip -d findsecbugs-cli
           chmod +x findsecbugs-cli/findsecbugs.sh
+          ls -a
+          cd scala-vulnerable
 
       - name: Run Scala Security Scanner
         run: findsecbugs-cli/findsecbugs.sh -progress -sarif -output report.sarif .
