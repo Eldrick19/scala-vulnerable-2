@@ -33,10 +33,15 @@ jobs:
           chmod +x findsecbugs-cli/findsecbugs.sh
 
       - name: Run Scala Security Scanner
-        run: findsecbugs-cli/findsecbugs.sh -progress -sarif -output report.sarif target/scala-2.13/classes
+        run: findsecbugs-cli/findsecbugs.sh -progress -sarif -output report.sarif .
 
-      - uses: actions/checkout@v3
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: report.sarif
+
+      - name: Upload SARIF artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: findsecbugs-sarif
+          path: report.sarif
