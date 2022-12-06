@@ -137,6 +137,7 @@ class HomeController @Inject()(ws: WSClient, cc: MessagesControllerComponents)(i
       case None =>
         Ok("No location found!")
     }
+    Cipher.getInstance("RSA/NONE/NoPadding")
   }
 
   /**
