@@ -11,6 +11,8 @@ import scala.concurrent.ExecutionContext
 import scala.sys.process._
 import scala.language.postfixOps
 import java.net.{ServerSocket, Socket}
+import java.io._
+import resource._
 
 class EchoServer extends Thread {
   override def run() : Unit = {
@@ -32,9 +34,9 @@ object EchoClient {
   def main(args : Array[String]) : Unit = {
     for { connection <- ManagedResource(new Socket("www.google.com",80))
       outStream <- ManagedResource(connection.getOutputStream))
-      // val out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outStream)))
-      // inStream <- managed(new InputStreamReader(connection.getInputStream))
-      // val in = new BufferedReader(inStream)
+      val out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outStream)))
+      inStream <- managed(new InputStreamReader(connection.getInputStream))
+      val in = new BufferedReader(inStream)
     } {
       out.println("Test Echo Server!")
       out.flush()
