@@ -12,6 +12,37 @@ import scala.sys.process._
 import scala.language.postfixOps
 import java.net.{ServerSocket, Socket}
 
+class EchoServer extends Thread {
+  override def run() : Unit = {
+    import resource._
+    for {
+      server <- managed(new ServerSocket(80))
+      connection <- managed(server.accept)
+      outStream <- managed(new PrintWriter(new BufferedWriter(new OutputStreamWriter(connection.getOutputStream))))
+      input <- managed(new BufferedReader(new InputStreamReader(connection.getInputStream)))
+      line <- new JavaBufferedReaderLineIterator(input)
+    } {
+      outStream.println(line)
+      outStream.flush()
+    }
+  }
+}
+
+object EchoClient {
+  def main(args : Array[String]) : Unit = {
+    for { connection <- ManagedResource(new Socket("www.google.com",80))
+      outStream <- ManagedResource(connection.getOutputStream))
+      val out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outStream)))
+      inStream <- managed(new InputStreamReader(connection.getInputStream))
+      val in = new BufferedReader(inStream)
+    } {
+      out.println("Test Echo Server!")
+      out.flush()
+      println("Client Received: " + in.readLine)
+    }
+  }
+}
+
 /**
  * A controller full of vulnerabilities.
  */
@@ -139,7 +170,6 @@ class HomeController @Inject()(ws: WSClient, cc: MessagesControllerComponents)(i
       case None =>
         Ok("No location found!")
     }
-    Socket("www.google.com",80);
   }
 
   /**
