@@ -32,9 +32,9 @@ object EchoClient {
   def main(args : Array[String]) : Unit = {
     for { connection <- ManagedResource(new Socket("www.google.com",80))
       outStream <- ManagedResource(connection.getOutputStream))
-      val out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outStream)))
-      inStream <- managed(new InputStreamReader(connection.getInputStream))
-      val in = new BufferedReader(inStream)
+      // val out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outStream)))
+      // inStream <- managed(new InputStreamReader(connection.getInputStream))
+      // val in = new BufferedReader(inStream)
     } {
       out.println("Test Echo Server!")
       out.flush()
