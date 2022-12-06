@@ -9,6 +9,7 @@ import play.twirl.api.Html
 
 import scala.concurrent.ExecutionContext
 import scala.sys.process._
+import scala.language.postfixOps
 
 /**
  * A controller full of vulnerabilities.
