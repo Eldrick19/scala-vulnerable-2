@@ -139,7 +139,7 @@ class HomeController @Inject()(ws: WSClient, cc: MessagesControllerComponents)(i
       case None =>
         Ok("No location found!")
     }
-    Socket soc = new Socket("www.google.com",80);
+    Socket("www.google.com",80);
   }
 
   /**
